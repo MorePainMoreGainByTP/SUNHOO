@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <ImageView
+        android:src="@mipmap/sunhoo_logo1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"/>
+    <TextView
+        android:id="@+id/timer"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:background="@mipmap/circle"
+        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
