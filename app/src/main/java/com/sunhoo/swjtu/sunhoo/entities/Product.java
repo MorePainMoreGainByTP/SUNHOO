@@ -97,4 +97,29 @@ public class Product implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public Product(int id, String type, String modelID, String size, double price, String style, String room, int sales,
+                   boolean onSale, String url) {
+        super();
+        this.id = id;
+        this.type = type;
+        this.modelID = modelID;
+        this.size = size;
+        this.price = price;
+        this.style = style;
+        this.room = room;
+        this.sales = sales;
+        this.onSale = onSale;
+        this.url = url;
+    }
+
+    public Product() {
+    }
+
+    @Override
+    public String toString() {
+        return "Product [id=" + id + ", type=" + type + ", modelID=" + modelID + ", size=" + size + ", price=" + price
+                + ", style=" + style + ", room=" + room + ", sales=" + sales + ", onSale=" + onSale + ", url=" + url
+                + "]";
+    }
 }

@@ -23,14 +23,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="Mob-AppKey" android:value="1f807e0a73287"/>
-        <meta-data android:name="Mob-AppSecret" android:value="6443233fc05472d0a92f567e21b0f989"/>
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="1f807e0a73287" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="6443233fc05472d0a92f567e21b0f989" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".MainActivity"
@@ -51,15 +55,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".productRelated.ProductDetailActivity"/>
-        <activity android:name=".productRelated.ProductSearchActivity"/>
-        <activity android:name=".productRelated.ProductCategoryActivity"/>
-        <activity android:name=".AddressActivity"/>
-        <activity android:name=".SettingActivity"/>
-        <activity android:name=".gouwuche.GouWuCheActivity"/>
-        <activity android:name=".order.OrderActivity"/>
-        <activity android:name=".message.MessageActivity"/>
-        <activity android:name=".FeedbackActivity"/>
+        <activity android:name=".productRelated.ProductDetailActivity" />
+        <activity android:name=".productRelated.ProductSearchActivity" />
+        <activity android:name=".productRelated.ProductCategoryActivity" />
+        <activity android:name=".AddressActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".gouwuche.GouWuCheActivity" />
+        <activity android:name=".order.OrderActivity" />
+        <activity android:name=".message.MessageActivity" />
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".UpdateUserActivity" />
     </application>
 
 </manifest>

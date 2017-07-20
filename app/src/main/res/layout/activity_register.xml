@@ -64,6 +64,7 @@
                 <EditText
                     android:id="@+id/phoneNumberEdit"
                     android:layout_width="match_parent"
+                    android:maxLength="11"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_number"
                     android:inputType="phone" />

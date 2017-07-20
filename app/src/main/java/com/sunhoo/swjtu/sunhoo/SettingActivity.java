@@ -1,8 +1,11 @@
 package com.sunhoo.swjtu.sunhoo;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +24,29 @@ import android.widget.Toast;
 public class SettingActivity extends AppCompatActivity {
 
     CheckBox checkBox;
+    ProgressDialog progressDialog;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1://开启对话框
+                    if (progressDialog == null) {
+                        progressDialog = new ProgressDialog(SettingActivity.this);
+                        progressDialog.setMessage("检查中...");
+                        progressDialog.create();
+                    }
+                    if (!progressDialog.isShowing())
+                        progressDialog.show();
+                    break;
+                case 2://登录成功
+                    if (progressDialog != null && progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    Toast.makeText(SettingActivity.this, "已是最新版", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +85,12 @@ public class SettingActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                handler.sendEmptyMessage(1);
                 SystemClock.sleep(2000);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(SettingActivity.this, "已是最新版", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessage(2);
                     }
                 });
             }
@@ -71,7 +98,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void onFeedback(View v) {
-        startActivity(new Intent(this,FeedbackActivity.class));
+        startActivity(new Intent(this, FeedbackActivity.class));
     }
 
     public void onExit(View v) {

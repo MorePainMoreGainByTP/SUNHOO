@@ -265,34 +265,34 @@ public class RegisterActivity extends AppCompatActivity {
                         case 0:
                             handler.sendEmptyMessage(4);
                             break;
-            case 1:
-                handler.sendEmptyMessage(5);
-                break;
-            case 2:
-                handler.sendEmptyMessage(6);
-                break;
-            default:
-                handler.sendEmptyMessage(4);
-                break;
-        }
+                        case 1:
+                            handler.sendEmptyMessage(5);
+                            break;
+                        case 2:
+                            handler.sendEmptyMessage(6);
+                            break;
+                        default:
+                            handler.sendEmptyMessage(4);
+                            break;
+                    }
 
-    } catch (JSONException e) {
-        handler.sendEmptyMessage(4);
-        e.printStackTrace();
-    }
+                } catch (JSONException e) {
+                    handler.sendEmptyMessage(4);
+                    e.printStackTrace();
+                }
                 Log.i(TAG, "jsonObject: " + jsonObject);
-}
+            }
         }, new Response.ErrorListener() {
-@Override
-public void onErrorResponse(VolleyError volleyError) {
-        handler.sendEmptyMessage(4);
-        Log.e(TAG, "onErrorResponse: ", volleyError);
-        }
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                handler.sendEmptyMessage(4);
+                Log.e(TAG, "onErrorResponse: ", volleyError);
+            }
         });
         requestQueue.add(jsonObjectRequest);
-        }
+    }
 
-public void onRegister(View v) {
+    public void onRegister(View v) {
         userNameStr = userName.getEditText().getText().toString().trim();
         addressStr = address.getEditText().getText().toString().trim();
         phoneStr = phone.getEditText().getText().toString().trim();
@@ -300,9 +300,9 @@ public void onRegister(View v) {
         passAgainStr = passAgain.getEditText().getText().toString().trim();
         checkCodeStr = checkCode.getEditText().getText().toString().trim();
         if (TextUtils.isEmpty(userNameStr)) {
-        userName.setError("用户名");
+            userName.setError("用户名");
         } else if (TextUtils.isEmpty(addressStr)) {
-        address.setError("地址");
+            address.setError("地址");
         } else if (TextUtils.isEmpty(phoneStr)) {
             phone.setError("手机号");
         } else if (TextUtils.isEmpty(passStr)) {

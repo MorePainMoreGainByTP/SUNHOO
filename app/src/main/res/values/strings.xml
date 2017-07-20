@@ -29,6 +29,7 @@
     <string name="feedback">反馈</string>
     <string name="exit">退出登录</string>
     <string name="input_content">反馈内容</string>
+    <string name="save">保存</string>
 
 
     <string-array name="province">
