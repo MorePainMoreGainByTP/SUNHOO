@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.mob.MobSDK;
 import com.sunhoo.swjtu.sunhoo.entities.User;
 
 import org.json.JSONException;
@@ -32,7 +33,10 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private static final String URL = "http://192.168.253.1:8080/SSM-SHFGuiding/ALogin";
+    public static final boolean DEBUG = false;
+    public static final String BASE_URL = "http://192.168.253.1:8080/SSM-SHFGuiding";
+    private static final String URL = BASE_URL + "/ALogin";
+
     User user;
 
     private RequestQueue requestQueue;
@@ -90,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             phone.getEditText().setText(sharedPreferences.getString("phone", ""));
             password.getEditText().setText(sharedPreferences.getString("password", ""));
         }
+        MobSDK.init(this, "1f807e0a73287", "6443233fc05472d0a92f567e21b0f989");
     }
 
     private void getViews() {
@@ -98,6 +103,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLogin(View v) {
+        if (DEBUG) {
+            doLogin();
+            return;
+        }
         String phoneStr = phone.getEditText().getText().toString().trim();
         String passwordStr = password.getEditText().getText().toString().trim();
         if (TextUtils.isEmpty(phoneStr) || phoneStr.length() != 11) {

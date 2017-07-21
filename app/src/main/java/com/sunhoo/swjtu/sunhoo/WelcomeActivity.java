@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class WelcomeActivity extends AppCompatActivity {
 
     private TextView timer;
-    private int currTime = 4;
+    private int currTime = 1;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

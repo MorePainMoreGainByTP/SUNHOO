@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -65,9 +64,11 @@ import java.util.List;
 import toan.android.floatingactionmenu.FloatingActionButton;
 import toan.android.floatingactionmenu.FloatingActionsMenu;
 
+import static com.sunhoo.swjtu.sunhoo.LoginActivity.BASE_URL;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, OnItemClickListener, View.OnClickListener {
-    private static final String URL = "http://192.168.253.1:8080/SSM-SHFGuiding/AProductAll";
+    private static final String URL = BASE_URL + "/AProductAll";
     private static final String TAG = "MainActivity";
     public static User user;
 
@@ -126,7 +127,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void getUser() {
-        user = (User) getIntent().getSerializableExtra("user");
+        if (LoginActivity.DEBUG) {
+            user = new User();
+            user.setUserName("汤朋");
+            user.setPhone("15520452757");
+            user.setPassword("111");
+        } else user = (User) getIntent().getSerializableExtra("user");
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         headerLinearLayout = (LinearLayout) navigationView.getHeaderView(0);
         headerLinearLayout.findViewById(R.id.user_header).setOnClickListener(new View.OnClickListener() {
@@ -205,7 +211,13 @@ public class MainActivity extends AppCompatActivity
                             swipeRefreshLayout.setRefreshing(false);
                         } else {
                             //加载下一页数据
-                            getDataFromServer();
+                            new Thread() {
+                                @Override
+                                public void run() {
+                                    super.run();
+                                    getDataFromServer();
+                                }
+                            }.start();
                         }
                     }
                 }
@@ -230,15 +242,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 super.run();
-                SystemClock.sleep(2000);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //停止刷新
-                        swipeRefreshLayout.setRefreshing(false);
-                        getDataFromServer();
-                    }
-                });
+                lastId = 0;
+                count = 10;
+                getDataFromServer();
             }
         }.start();
     }
@@ -291,19 +297,21 @@ public class MainActivity extends AppCompatActivity
                         handler.sendEmptyMessage(0);
                     }
                     Log.i(TAG, "返回的jsonObject: " + jsonObject);
-                    Log.i(TAG, "count: "+count);
+                    Log.i(TAG, "count: " + count);
                     if (count > 0)
                         try {
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            Log.i(TAG, "jsonArray: "+jsonArray);
+                            Log.i(TAG, "jsonArray: " + jsonArray);
                             Gson gson = new Gson();
+                            if (lastId == 0 && productList != null)
+                                productList.clear();
                             for (int i = 0; i < count; i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
-                                Log.i(TAG, "object: "+i+"  "+object);
+                                Log.i(TAG, "object: " + i + "  " + object);
                                 productList.add(gson.fromJson(object.toString(), Product.class));
                             }
                             lastId = productList.get(productList.size() - 1).getId();
-                            productCommendAdapter.notifyDataSetChanged();
+                            handler.sendEmptyMessage(3);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             handler.sendEmptyMessage(0);
@@ -432,6 +440,8 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
     }
 
+    AlertDialog alertDialog;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -439,7 +449,8 @@ public class MainActivity extends AppCompatActivity
                 actionsMenu.collapse();
                 LayoutInflater layoutInflater = getLayoutInflater();
                 View view = layoutInflater.inflate(R.layout.product_category, null);
-                new AlertDialog.Builder(this).setView(view).setNegativeButton("取消", null).create().show();
+                alertDialog = new AlertDialog.Builder(this).setView(view).setNegativeButton("取消", null).create();
+                alertDialog.show();
                 TextView chuang = (TextView) view.findViewById(R.id.chuang);
                 TextView guiZi = (TextView) view.findViewById(R.id.gui_zi);
                 TextView zhuoZi = (TextView) view.findViewById(R.id.zhuo_zi);
@@ -454,25 +465,32 @@ public class MainActivity extends AppCompatActivity
                 chuangDian.setOnClickListener(this);
                 break;
             case R.id.productSearch:
+                alertDialog.dismiss();
                 startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
                 actionsMenu.collapse();
                 break;
             case R.id.chuang:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "chuang"));
                 break;
             case R.id.gui_zi:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "guiZi"));
                 break;
             case R.id.zhuo_zi:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "zhuoZi"));
                 break;
             case R.id.yi_zi:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "yiZi"));
                 break;
             case R.id.sha_fa:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "shaFa"));
                 break;
             case R.id.chuang_dian:
+                alertDialog.dismiss();
                 startActivity(new Intent(this, ProductCategoryActivity.class).putExtra("category", "chuangDian"));
                 break;
         }
@@ -525,7 +543,11 @@ public class MainActivity extends AppCompatActivity
                 case 2:
                     Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
+                case 3://加载成功
+                    productCommendAdapter.notifyDataSetChanged();
+                    break;
             }
+            swipeRefreshLayout.setRefreshing(false);
         }
     };
 

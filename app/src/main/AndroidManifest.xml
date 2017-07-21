@@ -15,20 +15,13 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:name="com.mob.MobApplication"
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/sunhoo2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data
-            android:name="Mob-AppKey"
-            android:value="1f807e0a73287" />
-        <meta-data
-            android:name="Mob-AppSecret"
-            android:value="6443233fc05472d0a92f567e21b0f989" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -65,6 +58,7 @@
         <activity android:name=".message.MessageActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".UpdateUserActivity" />
+        <activity android:name=".order.GenerateOrderActivity" />
     </application>
 
 </manifest>

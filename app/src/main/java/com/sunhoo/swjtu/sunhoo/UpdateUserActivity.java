@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.sunhoo.swjtu.sunhoo.LoginActivity.BASE_URL;
 import static com.sunhoo.swjtu.sunhoo.MainActivity.user;
 
 /**
@@ -34,7 +35,7 @@ import static com.sunhoo.swjtu.sunhoo.MainActivity.user;
 
 public class UpdateUserActivity extends AppCompatActivity {
     private static final String TAG = "UpdateUserActivity";
-    private static final String URL = "http://192.168.253.1:8080/SSM-SHFGuiding/AUpdate";
+    private static final String URL = BASE_URL + "/AUpdate";
 
     String province, city, detail;
     String preProvince, preCity, preDetail, preUserName;
@@ -60,6 +61,8 @@ public class UpdateUserActivity extends AppCompatActivity {
     public void getViews() {
         address = (TextInputLayout) findViewById(R.id.addressWrapper);
         userName = (TextInputLayout) findViewById(R.id.userNameWrapper);
+        address.getEditText().setText(user.getAddressProvince() + user.getAddressCity() + user.getAddressDetail());
+        userName.getEditText().setText(user.getUserName());
     }
 
     public void onChooseAddress(View v) {

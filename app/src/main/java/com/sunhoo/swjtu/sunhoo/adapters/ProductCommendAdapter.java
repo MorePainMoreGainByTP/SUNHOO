@@ -17,6 +17,8 @@ import com.sunhoo.swjtu.sunhoo.productRelated.ProductDetailActivity;
 
 import java.util.List;
 
+import static com.sunhoo.swjtu.sunhoo.LoginActivity.BASE_URL;
+
 /**
  * Created by tangpeng on 2017/3/5.
  */
@@ -44,7 +46,7 @@ public class ProductCommendAdapter extends RecyclerView.Adapter<ProductCommendAd
         final Product product = productList.get(position);
         //Glide很不错的图片加载库，自动完成图片压缩，可以从本地、网上、和资源id中加载图片，
         // 使用起来非常简单，只需要一句话,load里面可以是URI、资源ID，路径，into里面存放一个imageView实例
-        Glide.with(context).load(product.getUrl()).placeholder(R.mipmap.sunhoo_logo3).into(holder.imageView);
+        Glide.with(context).load(BASE_URL + product.getUrl()).placeholder(R.mipmap.sunhoo_logo3).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

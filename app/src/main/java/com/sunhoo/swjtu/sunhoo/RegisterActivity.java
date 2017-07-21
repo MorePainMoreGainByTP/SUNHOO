@@ -36,13 +36,15 @@ import java.util.ArrayList;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
+import static com.sunhoo.swjtu.sunhoo.LoginActivity.BASE_URL;
+
 /**
  * Created by tangpeng on 2017/7/18.
  */
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
-    private static final String URL = "http://192.168.253.1:8080/SSM-SHFGuiding/ARegister";
+    private static final String URL = BASE_URL + "/ARegister";
 
     TextInputLayout userName, address, phone, pass, passAgain, checkCode;
     TextView checkCodeTxt;

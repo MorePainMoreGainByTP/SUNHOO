@@ -2,14 +2,14 @@ package com.sunhoo.swjtu.sunhoo.entities;
 
 import org.litepal.crud.DataSupport;
 
-import java.io.Serializable;
-
 /**
- * Created by tangpeng on 2017/7/18.
+ * Created by tangpeng on 2017/7/21.
  */
 
-public class Product extends DataSupport implements Serializable {
-    protected int id;
+public class ShoppingCarProduct extends DataSupport {
+    private int id;
+    protected int num;
+    protected int serverId;
     protected String type;
     protected String modelID;
     protected String size;
@@ -20,12 +20,29 @@ public class Product extends DataSupport implements Serializable {
     protected boolean onSale;
     protected String url;
 
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
     }
 
     public String getType() {
@@ -40,8 +57,8 @@ public class Product extends DataSupport implements Serializable {
         return modelID;
     }
 
-    public void setModelID(String modelId) {
-        this.modelID = modelId;
+    public void setModelID(String modelID) {
+        this.modelID = modelID;
     }
 
     public String getSize() {
@@ -100,10 +117,10 @@ public class Product extends DataSupport implements Serializable {
         this.url = url;
     }
 
-    public Product(int id, String type, String modelID, String size, double price, String style, String room, int sales,
-                   boolean onSale, String url) {
-        super();
+    public ShoppingCarProduct(int id, int num, int serverId, String type, String modelID, String size, double price, String style, String room, int sales, boolean onSale, String url) {
         this.id = id;
+        this.num = num;
+        this.serverId = serverId;
         this.type = type;
         this.modelID = modelID;
         this.size = size;
@@ -115,13 +132,38 @@ public class Product extends DataSupport implements Serializable {
         this.url = url;
     }
 
-    public Product() {
+    public ShoppingCarProduct(Product product, int num) {
+        this.num = num;
+        this.serverId = product.getId();
+        this.type = product.getType();
+        this.modelID = product.getModelID();
+        this.size = product.getSize();
+        this.price = product.getPrice();
+        this.style = product.getStyle();
+        this.room = product.getRoom();
+        this.sales = product.getSales();
+        this.onSale = product.isOnSale();
+        this.url = product.getUrl();
     }
 
     @Override
     public String toString() {
-        return "Product [id=" + id + ", type=" + type + ", modelID=" + modelID + ", size=" + size + ", price=" + price
-                + ", style=" + style + ", room=" + room + ", sales=" + sales + ", onSale=" + onSale + ", url=" + url
-                + "]";
+        return "ShoppingCarProduct{" +
+                "id=" + id +
+                ", num=" + num +
+                ", serverId=" + serverId +
+                ", type='" + type + '\'' +
+                ", modelID='" + modelID + '\'' +
+                ", size='" + size + '\'' +
+                ", price=" + price +
+                ", style='" + style + '\'' +
+                ", room='" + room + '\'' +
+                ", sales=" + sales +
+                ", onSale=" + onSale +
+                ", url='" + url + '\'' +
+                "} " + super.toString();
+    }
+
+    public ShoppingCarProduct() {
     }
 }

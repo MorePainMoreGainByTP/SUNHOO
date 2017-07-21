@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGrey2"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -13,8 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -22,8 +22,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/no_products2"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
@@ -55,9 +63,10 @@
             android:layout_marginRight="10dp"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="onDeleteProduct"
             android:padding="5dp"
             android:text="删除"
-            android:textColor="@color/accent" />
+            android:textColor="@color/red" />
 
         <TextView
             android:id="@+id/compute"
@@ -67,8 +76,9 @@
             android:layout_marginRight="10dp"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="onCount"
             android:padding="5dp"
             android:text="结算"
-            android:textColor="@color/accent" />
+            android:textColor="@color/red" />
     </LinearLayout>
 </LinearLayout>
