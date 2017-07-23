@@ -59,6 +59,7 @@
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".UpdateUserActivity" />
         <activity android:name=".order.GenerateOrderActivity" />
+        <activity android:name=".order.DetailOrderActivity"/>
     </application>
 
 </manifest>

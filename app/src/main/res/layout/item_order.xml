@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -10,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/time"
@@ -28,6 +29,7 @@
                 android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBlue"
                 android:gravity="center"
                 android:text="取消"
                 android:textSize="@dimen/mTextSize"
@@ -48,12 +50,12 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkGrey2" />
+        android:background="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="0dp"
@@ -76,7 +78,7 @@
             android:id="@+id/pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="@dimen/lTextSize" />
     </LinearLayout>
 

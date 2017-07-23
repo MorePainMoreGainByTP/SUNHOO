@@ -1,6 +1,7 @@
 package com.sunhoo.swjtu.sunhoo.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -110,6 +111,18 @@ public class Order implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getFormatDate() {
+        return new Timestamp(Long.parseLong(date)).toString();
+    }
+
+    public String getFormatPrice() {
+        return "¥" + String.format("%.2f", allPrice);
+    }
+
+    public String getProductNumStr() {
+        return "共" + allCount + "件商品";
     }
 
 }

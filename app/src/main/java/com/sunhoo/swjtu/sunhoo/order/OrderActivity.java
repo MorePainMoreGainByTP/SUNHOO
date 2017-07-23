@@ -1,5 +1,6 @@
 package com.sunhoo.swjtu.sunhoo.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -43,6 +44,7 @@ public class OrderActivity extends AppCompatActivity {
     private void getViews() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+
     }
 
     private void setViews() {
@@ -63,9 +65,31 @@ public class OrderActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(tabTitles.get(2)));
         tabLayout.addTab(tabLayout.newTab().setText(tabTitles.get(3)));
 
+        viewPager.requestDisallowInterceptTouchEvent(true);
+        viewPager.setOffscreenPageLimit(4);
         OrderViewPagerAdapter viewPagerAdapter = new OrderViewPagerAdapter(getSupportFragmentManager(), orderFragments, tabTitles);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager, true);   //需在setAdapter之后，第二个参数设置是否 自动刷新fragment的布尔值
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String type = data.getStringExtra("type");
+            int position = data.getIntExtra("position",0);
+            switch (requestCode) {
+                case 1:
+                    if(type.equals("待确认")){
+                        orderFragments.get(0).getOrderAdapter().cancelOrder2(position);
+                    }else if(type.equals("已完成")){
+                        orderFragments.get(2).getOrderAdapter().deleteOrder2(position);
+                    }else if(type.equals("已取消")){
+                        orderFragments.get(3).getOrderAdapter().deleteOrder2(position);
+                    }
+                    break;
+            }
+        }
     }
 
     @Override

@@ -172,7 +172,6 @@ public class GenerateOrderActivity extends AppCompatActivity {
                 public void run() {
                     handler.sendEmptyMessage(3);
                     Gson gson = new Gson();
-
                     Map<Object, Object> info = new HashMap<Object, Object>();
                     info.put("order", order);
                     info.put("orderItems", orderItems);

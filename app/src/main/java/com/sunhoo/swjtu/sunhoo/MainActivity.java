@@ -465,7 +465,6 @@ public class MainActivity extends AppCompatActivity
                 chuangDian.setOnClickListener(this);
                 break;
             case R.id.productSearch:
-                alertDialog.dismiss();
                 startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
                 actionsMenu.collapse();
                 break;
