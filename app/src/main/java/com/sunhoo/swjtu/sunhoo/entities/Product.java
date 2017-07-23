@@ -115,6 +115,11 @@ public class Product extends DataSupport implements Serializable {
         this.url = url;
     }
 
+
+    public String getFormatPrice() {
+        return "¥" + String.format("%.2f", price);
+    }
+
     public Product() {
     }
 

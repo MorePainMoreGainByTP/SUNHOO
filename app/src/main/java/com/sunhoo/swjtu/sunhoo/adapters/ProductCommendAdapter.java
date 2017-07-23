@@ -58,7 +58,7 @@ public class ProductCommendAdapter extends RecyclerView.Adapter<ProductCommendAd
             }
         });
         holder.productInfo.setText(product.getModelID() + "," + product.getSize() + "," + product.getStyle());
-        holder.productPrice.setText("¥" + String.format("%.2f", product.getPrice()));
+        holder.productPrice.setText(product.getFormatPrice());
     }
 
     @Override

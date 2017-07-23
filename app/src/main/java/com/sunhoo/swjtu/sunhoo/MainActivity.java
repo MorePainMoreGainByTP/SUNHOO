@@ -34,6 +34,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity
     private static final String URL = BASE_URL + "/AProductAll";
     private static final String TAG = "MainActivity";
     public static User user;
+    public static final String PUSH_KEY = "Xqupn5MG03QF4g3ECTi5Y56Y";
 
     NavigationView navigationView;
     LinearLayout headerLinearLayout;
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getViews();
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,PUSH_KEY);
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override

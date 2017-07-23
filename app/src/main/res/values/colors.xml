@@ -17,6 +17,7 @@
     <color name="colorIconBlueTransparent">#aa0b76dd</color>
     <color name="colorGray1">#8a8a8a</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite2">#aaffffff</color>
     <color name="colorGray2">#cdcdcd</color>
     <color name="colorGray3">#88e6e6e6</color>
     <color name="transparent">#00000000</color>

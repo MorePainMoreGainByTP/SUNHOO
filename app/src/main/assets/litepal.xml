@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="ShoppingCar" />
-    <version value="3" />
+    <version value="5" />
     <list>
         <mapping class="com.sunhoo.swjtu.sunhoo.entities.ShoppingCarProduct" />
+        <mapping class="com.sunhoo.swjtu.sunhoo.entities.PushInfoLocal" />
     </list>
 </litepal>

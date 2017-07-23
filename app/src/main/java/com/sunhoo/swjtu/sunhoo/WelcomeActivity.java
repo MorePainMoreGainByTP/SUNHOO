@@ -42,5 +42,6 @@ public class WelcomeActivity extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.timer);
         timer.setText(currTime + "s");
         handler.sendEmptyMessageDelayed(1, 1000);
+
     }
 }

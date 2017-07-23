@@ -16,6 +16,7 @@ public class User implements Serializable {
     private String phone;
     private boolean onUse;
     private String intro;
+    private String channelId;
 
     public int getId() {
         return id;
@@ -92,32 +93,24 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String userName, String password, String addressProvince, String addressCity,
-                String addressDetail, Boolean onUse, String phone, String intro) {
-        super();
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    public User(int id, String userName, String password, String addressProvince, String addressCity, String addressDetail, String phone, boolean onUse, String intro, String channelId) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.addressProvince = addressProvince;
         this.addressCity = addressCity;
         this.addressDetail = addressDetail;
-        this.onUse = onUse;
         this.phone = phone;
+        this.onUse = onUse;
         this.intro = intro;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", addressProvince='" + addressProvince + '\'' +
-                ", addressCity='" + addressCity + '\'' +
-                ", addressDetail='" + addressDetail + '\'' +
-                ", phone='" + phone + '\'' +
-                ", onUse=" + onUse +
-                ", intro='" + intro + '\'' +
-                '}';
+        this.channelId = channelId;
     }
 }
