@@ -3,6 +3,7 @@ package com.sunhoo.swjtu.sunhoo;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,12 +18,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+
+import static com.sunhoo.swjtu.sunhoo.MainActivity.PUSH_KEY;
+
 /**
  * Created by tangpeng on 2017/7/19.
  */
 
 public class SettingActivity extends AppCompatActivity {
-
+    SharedPreferences sharedPreferences;
     CheckBox checkBox;
     ProgressDialog progressDialog;
     Handler handler = new Handler() {
@@ -55,6 +61,7 @@ public class SettingActivity extends AppCompatActivity {
         getViews();
         setViews();
         setToolBar();
+        sharedPreferences = getSharedPreferences("sunhoo",MODE_PRIVATE);
     }
 
     private void setToolBar() {
@@ -72,10 +79,15 @@ public class SettingActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 if (isChecked) {
                     Toast.makeText(SettingActivity.this, "接收通知信息", Toast.LENGTH_SHORT).show();
+                    PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, PUSH_KEY);
+                    editor.putBoolean("receiveMsg",true);
                 } else {
                     Toast.makeText(SettingActivity.this, "关闭通知信息", Toast.LENGTH_SHORT).show();
+                    PushManager.stopWork(getApplicationContext());
+                    editor.putBoolean("receiveMsg",false);
                 }
             }
         });

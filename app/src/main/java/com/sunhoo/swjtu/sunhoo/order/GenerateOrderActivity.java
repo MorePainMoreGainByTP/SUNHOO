@@ -155,8 +155,8 @@ public class GenerateOrderActivity extends AppCompatActivity {
         String address = user.getAddressProvince() + "-" + user.getAddressCity() + "-" + user.getAddressDetail();
         if (TextUtils.isEmpty(customer)) {
             customerLayout.setError("输入客户姓名");
-        } else if (TextUtils.isEmpty(customerPhone)) {
-            customerPhoneLayout.setError("输入客户手机号");
+        } else if (TextUtils.isEmpty(customerPhone) || customerPhone.length() != 11) {
+            customerPhoneLayout.setError("输入有效手机号");
         } else if (TextUtils.isEmpty(address)) {
             Toast.makeText(this, "无店铺地址，请在个人信息修改！", Toast.LENGTH_SHORT).show();
         } else {
@@ -166,7 +166,6 @@ public class GenerateOrderActivity extends AppCompatActivity {
             order.setAddress(address);
             order.setType("待确认");
             order.setUserID(user.getId());
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {

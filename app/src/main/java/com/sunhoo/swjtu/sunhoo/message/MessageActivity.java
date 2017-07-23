@@ -51,8 +51,8 @@ public class MessageActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("通知信息");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+}
 
     private void getDataFromDB() {
         pushInfoLocals = DataSupport.findAll(PushInfoLocal.class);

@@ -105,7 +105,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getViews();
-        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,PUSH_KEY);
+        sharedPreferences = getSharedPreferences("sunhoo", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("receiveMsg", true))
+            PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, PUSH_KEY);
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        sharedPreferences = getSharedPreferences("sunhoo", MODE_PRIVATE);
+
         getUser();
         initData();
 
