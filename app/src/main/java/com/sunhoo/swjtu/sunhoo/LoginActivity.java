@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     public static final boolean DEBUG = false;
-    public static final String BASE_URL = "http://192.168.253.1:8080/SSM-SHFGuiding";
+    public static final String BASE_URL = "http://192.168.253.1/";
     private static final String URL = BASE_URL + "/ALogin";
 
     User user;
